@@ -18,4 +18,8 @@ public class ArticleService {
     public List<Article> findAll() {
         return articleRepository.findAll();
     }
+
+    public Article findArticle(String uuid) {
+        return articleRepository.findByUuid(uuid);
+    }
 }

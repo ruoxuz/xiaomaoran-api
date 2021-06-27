@@ -7,6 +7,7 @@ import com.ruoxu.nekonekoko.util.JsonConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -20,14 +21,22 @@ public class ArticleController {
     private ArticleService articleService;
 
     /**
-    * @date: 2021/6/26 11:47
-    * @description: 获取文章
-    */
+     * @date 2021/6/26 11:47
+     * 获取文章
+     * @return java.lang.String
+     * @throws JsonProcessingException
+     */
     @GetMapping("/getArticles")
     @ResponseBody
     public String getArticles() throws JsonProcessingException {
         List<Article> articleList = articleService.findAll();
-        String result = JsonConverter.toString(articleList);
-        return result;
+        return JsonConverter.toString(articleList);
+    }
+
+    @GetMapping("/getArticle/{uuid}")
+    @ResponseBody
+    public String getArticle(@PathVariable String uuid) throws JsonProcessingException {
+        Article article = articleService.findArticle(uuid);
+        return JsonConverter.toString(article);
     }
 }
