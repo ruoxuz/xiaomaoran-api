@@ -22,4 +22,8 @@ public class ArticleService {
     public Article findArticle(String uuid) {
         return articleRepository.findByUuid(uuid);
     }
+
+    public Article saveArticle(Article article) {
+        return articleRepository.save(article);
+    }
 }
