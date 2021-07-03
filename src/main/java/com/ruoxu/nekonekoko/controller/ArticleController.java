@@ -5,12 +5,10 @@ import com.ruoxu.nekonekoko.dto.ArticleDTO;
 import com.ruoxu.nekonekoko.model.Article;
 import com.ruoxu.nekonekoko.service.ArticleService;
 import com.ruoxu.nekonekoko.util.JsonConverter;
+import com.ruoxu.nekonekoko.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,21 +45,20 @@ public class ArticleController {
     }
 
     @PostMapping("/saveArticle")
-    public void saveArticle(ArticleDTO articleDTO) {
-        articleService.saveArticle(articleDtoConvertToArticle(articleDTO));
+    public void saveArticle(@RequestBody ArticleDTO articleDTO) {
+        var article = articleDtoConvertToArticle(articleDTO);
+        article.setUuid(UUIDGenerator.getUUID());
+        article.setDelFlag(Boolean.FALSE);
+        articleService.saveArticle(article);
     }
 
     public Article articleDtoConvertToArticle(ArticleDTO articleDTO) {
         var article = new Article();
-        article.setUuid(articleDTO.getUuid());
-        article.setUserId(articleDTO.getUserId());
         article.setFolderId(articleDTO.getFolderId());
         article.setTitle(articleDTO.getTitle());
         article.setContent(articleDTO.getContent());
         article.setBackground(articleDTO.getBackground());
         article.setPersonal(articleDTO.getPersonal());
-        article.setCreateTime(articleDTO.getCreateTime());
-        article.setUpdateTime(articleDTO.getUpdateTime());
         return article;
     }
 }
