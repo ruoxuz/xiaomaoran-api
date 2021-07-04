@@ -1,23 +1,33 @@
 package com.ruoxu.nekonekoko.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Set;
 
 /**
  * @author ruoxu
  */
 @Entity
 @Table(name = "tag")
-public class Tag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Tag extends BaseEntity{
 
     private String name;
 
-    private Boolean delFlag;
+    @ManyToMany(mappedBy = "tags")
+    private Set<Article> articles;
 
-    private Date createTime;
+    public String getName() {
+        return name;
+    }
 
-    private Date updateTime;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
 }

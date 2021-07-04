@@ -1,6 +1,7 @@
 package com.ruoxu.nekonekoko.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author ruoxu
@@ -8,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "article")
 public class Article extends BaseEntity {
-
     private Long userId;
 
     private Long folderId;
@@ -17,11 +17,18 @@ public class Article extends BaseEntity {
 
     private String content;
 
+    private String summary;
+
     private String background;
 
     private Boolean personal;
 
-    private Boolean delFlag;
+    @ManyToMany
+    @JoinTable(
+            name = "article_tag",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags;
 
     public Long getUserId() {
         return userId;
@@ -55,6 +62,14 @@ public class Article extends BaseEntity {
         this.content = content;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     public String getBackground() {
         return background;
     }
@@ -71,11 +86,11 @@ public class Article extends BaseEntity {
         this.personal = personal;
     }
 
-    public Boolean getDelFlag() {
-        return delFlag;
+    public Set<Tag> getTags() {
+        return tags;
     }
 
-    public void setDelFlag(Boolean delFlag) {
-        this.delFlag = delFlag;
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

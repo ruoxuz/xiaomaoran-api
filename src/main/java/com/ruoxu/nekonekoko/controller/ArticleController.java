@@ -1,8 +1,10 @@
 package com.ruoxu.nekonekoko.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ruoxu.nekonekoko.dto.ArticleDTO;
+import com.ruoxu.nekonekoko.dto.ArticleDetailDto;
+import com.ruoxu.nekonekoko.dto.ArticleSummaryDto;
 import com.ruoxu.nekonekoko.model.Article;
+import com.ruoxu.nekonekoko.model.Tag;
 import com.ruoxu.nekonekoko.service.ArticleService;
 import com.ruoxu.nekonekoko.util.JsonConverter;
 import com.ruoxu.nekonekoko.util.UUIDGenerator;
@@ -10,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author ruoxu
@@ -28,8 +33,13 @@ public class ArticleController {
     @GetMapping("/getArticles")
     @ResponseBody
     public String getArticles() throws JsonProcessingException {
+        List<ArticleSummaryDto> articleSummaryDTOList = new ArrayList<>();
         List<Article> articleList = articleService.findAll();
-        return JsonConverter.toString(articleList);
+        articleList.forEach(article -> {
+            var articleSummaryDTO = articleConvertToArticleSummaryDTO(article);
+            articleSummaryDTOList.add(articleSummaryDTO);
+        });
+        return JsonConverter.toString(articleSummaryDTOList);
     }
 
     /**
@@ -45,20 +55,39 @@ public class ArticleController {
     }
 
     @PostMapping("/saveArticle")
-    public void saveArticle(@RequestBody ArticleDTO articleDTO) {
-        var article = articleDtoConvertToArticle(articleDTO);
+    public void saveArticle(@RequestBody ArticleDetailDto articleDetailDto) {
+        var article = articleDetailDtoConvertToArticle(articleDetailDto);
+        Set<Tag> tags = new HashSet<>();
+        articleDetailDto.getTags().forEach(tagDto -> {
+            var tag = new Tag();
+            tag.setName(tagDto.getName());
+            tags.add(tag);
+        });
+        article.setTags(tags);
         article.setUuid(UUIDGenerator.getUUID());
-        article.setDelFlag(Boolean.FALSE);
+        if (article.getContent().length() > 50) {
+            article.setSummary(article.getContent().substring(0, 50));
+        } else {
+            article.setSummary(article.getContent());
+        }
         articleService.saveArticle(article);
     }
 
-    public Article articleDtoConvertToArticle(ArticleDTO articleDTO) {
+    public Article articleDetailDtoConvertToArticle(ArticleDetailDto articleDetailDto) {
         var article = new Article();
-        article.setFolderId(articleDTO.getFolderId());
-        article.setTitle(articleDTO.getTitle());
-        article.setContent(articleDTO.getContent());
-        article.setBackground(articleDTO.getBackground());
-        article.setPersonal(articleDTO.getPersonal());
+        article.setTitle(articleDetailDto.getTitle());
+        article.setContent(articleDetailDto.getContent());
+        article.setPersonal(articleDetailDto.getPersonal());
         return article;
+    }
+
+    public ArticleSummaryDto articleConvertToArticleSummaryDTO(Article article) {
+        var articleSummaryDto = new ArticleSummaryDto();
+        articleSummaryDto.setUuid(article.getUuid());
+        articleSummaryDto.setTitle(article.getTitle());
+        articleSummaryDto.setSummary(article.getSummary());
+        articleSummaryDto.setCreateTime(article.getCreateTime());
+        articleSummaryDto.setUpdateTime(article.getUpdateTime());
+        return articleSummaryDto;
     }
 }
