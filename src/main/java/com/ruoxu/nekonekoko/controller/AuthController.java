@@ -7,6 +7,7 @@ import com.ruoxu.nekonekoko.model.Role;
 import com.ruoxu.nekonekoko.model.User;
 import com.ruoxu.nekonekoko.repository.RoleRepository;
 import com.ruoxu.nekonekoko.repository.UserRepository;
+import com.ruoxu.nekonekoko.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +67,7 @@ public class AuthController {
         }
 
         User user = new User();
+        user.setUuid(UUIDGenerator.getUUID());
         user.setUsername(signUpDto.getUsername());
         user.setEmail(signUpDto.getEmail());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
