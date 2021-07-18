@@ -1,6 +1,7 @@
 package com.ruoxu.nekonekoko.controller;
 
 import com.ruoxu.nekonekoko.config.JwtProvider;
+import com.ruoxu.nekonekoko.dto.UserDto;
 import com.ruoxu.nekonekoko.dto.LoginDto;
 import com.ruoxu.nekonekoko.dto.SignUpDto;
 import com.ruoxu.nekonekoko.model.Role;
@@ -15,7 +16,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,14 +47,21 @@ public class AuthController {
     private JwtProvider jwtProvider;
 
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) throws Exception {
+        String jwt = "";
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtProvider.generateJwtToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return ResponseEntity.ok(jwt + userDetails.getUsername() + userDetails.getAuthorities());
+            jwt = jwtProvider.generateJwtToken(authentication);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok(new UserDto(loginDto.getUsername(), jwt));
     }
 
     @PostMapping("/signup")

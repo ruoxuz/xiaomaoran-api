@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 public class UserPrinciple implements UserDetails {
     private String uuid;
 
-    private String name;
-
     private String username;
 
     private String email;
@@ -25,9 +23,8 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(String uuid, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(String uuid, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.uuid = uuid;
-        this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -40,7 +37,6 @@ public class UserPrinciple implements UserDetails {
 
         return new UserPrinciple(
                 user.getUuid(),
-                user.getName(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
@@ -65,21 +61,21 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
