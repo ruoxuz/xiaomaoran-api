@@ -46,6 +46,12 @@ public class AuthController {
     @Autowired
     private JwtProvider jwtProvider;
 
+    /**
+     * 登录
+     * @param loginDto
+     * @return
+     * @throws Exception
+     */
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) throws Exception {
         String jwt = "";
@@ -64,6 +70,11 @@ public class AuthController {
         return ResponseEntity.ok(new UserDto(loginDto.getUsername(), jwt));
     }
 
+    /**
+     * 注册
+     * @param signUpDto
+     * @return
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignUpDto signUpDto) {
         if (userRepository.existsByUsername(signUpDto.getUsername())) {
