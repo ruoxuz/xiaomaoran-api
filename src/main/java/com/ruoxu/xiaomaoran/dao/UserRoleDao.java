@@ -1,9 +1,9 @@
 package com.ruoxu.xiaomaoran.dao;
 
 import com.ruoxu.xiaomaoran.model.UserDetail;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface UserRoleDao {
     UserDetail getUserDetailByUsername(String username);
 }
