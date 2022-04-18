@@ -16,6 +16,9 @@ import java.util.List;
 import static com.ruoxu.xiaomaoran.mapper.UserDynamicSqlSupport.user;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
+/**
+ * @author ruoxu
+ */
 @Service
 public class AuthService {
 

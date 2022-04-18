@@ -43,6 +43,10 @@ public class ArticleController {
         return JsonConverter.toString(articleService.getArticleByUuid(uuid));
     }
 
+    /**
+     * 保存文章
+     * @param articleDetailDto
+     */
     @PostMapping("/saveArticle")
     public void saveArticle(@RequestBody ArticleDetailDto articleDetailDto) {
         articleService.saveArticleWithTags(articleDetailDto);

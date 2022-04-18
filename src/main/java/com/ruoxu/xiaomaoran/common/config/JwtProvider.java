@@ -20,6 +20,11 @@ public class JwtProvider {
     @Value("${jwt.Expiration}")
     private int jwtExpiration;
 
+    /**
+     * 生成Token
+     * @param authentication
+     * @return
+     */
     public String generateJwtToken(Authentication authentication) {
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
         return Jwts.builder()
@@ -30,6 +35,11 @@ public class JwtProvider {
                 .compact();
     }
 
+    /**
+     * 验证Token是否有效
+     * @param authToken
+     * @return
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
@@ -48,6 +58,11 @@ public class JwtProvider {
         return false;
     }
 
+    /**
+     * 从Token获取用户名
+     * @param token
+     * @return
+     */
     public String getUsernameFromJwtToken(String token) {
         return Jwts.parser()
                 .setSigningKey(jwtSecret)

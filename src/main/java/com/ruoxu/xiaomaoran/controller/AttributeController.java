@@ -15,11 +15,20 @@ public class AttributeController {
     @Autowired
     private AttributeService attributeService;
 
+    /**
+     * 获取所有标签
+     * @return
+     * @throws JsonProcessingException
+     */
     @GetMapping("/getAllTags")
     public String getAllAttribute() throws JsonProcessingException {
         return JsonConverter.toString(attributeService.getAllAttribute());
     }
 
+    /**
+     * 添加标签
+     * @param attributeDto
+     */
     @PostMapping("/addTag")
     public void addTag(@RequestBody AttributeDto attributeDto) {
         attributeService.saveAttribute(attributeDto);
