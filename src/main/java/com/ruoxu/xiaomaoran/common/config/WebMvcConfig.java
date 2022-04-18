@@ -1,4 +1,4 @@
-package com.ruoxu.xiaomaoran.config;
+package com.ruoxu.xiaomaoran.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

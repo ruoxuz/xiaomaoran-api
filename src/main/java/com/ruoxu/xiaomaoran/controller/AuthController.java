@@ -1,6 +1,6 @@
 package com.ruoxu.xiaomaoran.controller;
 
-import com.ruoxu.xiaomaoran.config.JwtProvider;
+import com.ruoxu.xiaomaoran.common.config.JwtProvider;
 import com.ruoxu.xiaomaoran.dto.UserDto;
 import com.ruoxu.xiaomaoran.dto.LoginDto;
 import com.ruoxu.xiaomaoran.dto.SignUpDto;

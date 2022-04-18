@@ -1,4 +1,4 @@
-package com.ruoxu.xiaomaoran.util;
+package com.ruoxu.xiaomaoran.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

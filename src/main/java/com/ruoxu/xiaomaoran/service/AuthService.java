@@ -5,7 +5,7 @@ import com.ruoxu.xiaomaoran.mapper.UserMapper;
 import com.ruoxu.xiaomaoran.dto.SignUpDto;
 import com.ruoxu.xiaomaoran.model.RelUserRole;
 import com.ruoxu.xiaomaoran.model.User;
-import com.ruoxu.xiaomaoran.util.UUIDGenerator;
+import com.ruoxu.xiaomaoran.common.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

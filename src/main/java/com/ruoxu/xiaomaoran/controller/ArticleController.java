@@ -4,16 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ruoxu.xiaomaoran.dto.ArticleDetailDto;
 import com.ruoxu.xiaomaoran.dto.ArticleSummaryDto;
 import com.ruoxu.xiaomaoran.service.ArticleService;
-import com.ruoxu.xiaomaoran.util.JsonConverter;
-import com.ruoxu.xiaomaoran.util.UUIDGenerator;
+import com.ruoxu.xiaomaoran.common.util.JsonConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author ruoxu

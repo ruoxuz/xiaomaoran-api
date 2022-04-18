@@ -1,4 +1,4 @@
-package com.ruoxu.xiaomaoran.config;
+package com.ruoxu.xiaomaoran.common.config;
 
 import com.ruoxu.xiaomaoran.service.UserPrinciple;
 import io.jsonwebtoken.*;

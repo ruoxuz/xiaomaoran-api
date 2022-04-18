@@ -3,7 +3,7 @@ package com.ruoxu.xiaomaoran.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ruoxu.xiaomaoran.dto.AttributeDto;
 import com.ruoxu.xiaomaoran.service.AttributeService;
-import com.ruoxu.xiaomaoran.util.JsonConverter;
+import com.ruoxu.xiaomaoran.common.util.JsonConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
