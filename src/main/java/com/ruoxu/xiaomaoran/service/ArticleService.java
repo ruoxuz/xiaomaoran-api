@@ -4,15 +4,12 @@ import com.ruoxu.xiaomaoran.dao.ArticleSummaryDao;
 import com.ruoxu.xiaomaoran.dto.ArticleDetailDto;
 import com.ruoxu.xiaomaoran.dto.ArticleSummaryDto;
 import com.ruoxu.xiaomaoran.mapper.ArticleMapper;
-import com.ruoxu.xiaomaoran.mapper.TagMapper;
 import com.ruoxu.xiaomaoran.model.Article;
-import com.ruoxu.xiaomaoran.model.RelArticleTag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.ruoxu.xiaomaoran.mapper.ArticleDynamicSqlSupport.article;
@@ -27,8 +24,6 @@ public class ArticleService {
     private ArticleSummaryDao articleSummaryDao;
     @Autowired
     private ArticleMapper articleMapper;
-    @Autowired
-    private TagMapper tagMapper;
 
     public List<ArticleSummaryDto> getArticleSummaryDtoList() {
         return articleSummaryDao.getArticleSummaryDtoList();
