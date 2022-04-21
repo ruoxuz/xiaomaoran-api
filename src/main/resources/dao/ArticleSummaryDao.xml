@@ -4,23 +4,26 @@
     <resultMap id="resultMap" type="com.ruoxu.xiaomaoran.dto.ArticleSummaryDto">
         <result column="uuid" jdbcType="VARCHAR" property="uuid" />
         <result column="title" jdbcType="VARCHAR" property="title" />
-        <result column="summary" jdbcType="VARCHAR" property="summary" />
-        <result column="username" jdbcType="VARCHAR" property="username" />
-        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-        <result column="background" jdbcType="VARCHAR" property="background" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="personal" jdbcType="BIT" property="personal" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <collection property="tags" ofType="com.ruoxu.xiaomaoran.dto.AttributeDto">
+        <collection property="attributes" ofType="com.ruoxu.xiaomaoran.dto.AttributeDto">
             <result column="attr_name" jdbcType="VARCHAR" property="name"/>
         </collection>
     </resultMap>
 
     <select id="getArticleSummaryDtoList" resultMap="resultMap">
-        SELECT
-            *
-        FROM
-
-        WHERE
-            c.id = #{id}
+        select
+            a.uuid,
+            a.title,
+            a.content,
+            a.personal,
+            a.create_time,
+            a.update_time,
+            attr.name as attr_name
+        from article a
+                 left join rel_article_attr raa on raa.article_id = a.id
+                 left join attribute attr on attr_id = raa.attr_id
     </select>
 </mapper>
