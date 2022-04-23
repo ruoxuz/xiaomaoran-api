@@ -1,6 +1,5 @@
-package com.ruoxu.xiaomaoran.service;
+package com.ruoxu.xiaomaoran.service.impl;
 
-import com.ruoxu.xiaomaoran.model.User;
 import com.ruoxu.xiaomaoran.model.UserDetail;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

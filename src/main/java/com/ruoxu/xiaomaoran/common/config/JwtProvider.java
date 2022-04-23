@@ -1,6 +1,6 @@
 package com.ruoxu.xiaomaoran.common.config;
 
-import com.ruoxu.xiaomaoran.service.UserPrinciple;
+import com.ruoxu.xiaomaoran.service.impl.UserPrinciple;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

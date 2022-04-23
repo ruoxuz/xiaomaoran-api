@@ -1,4 +1,4 @@
-package com.ruoxu.xiaomaoran.service;
+package com.ruoxu.xiaomaoran.service.impl;
 
 import com.ruoxu.xiaomaoran.dao.UserRoleDao;
 import com.ruoxu.xiaomaoran.model.UserDetail;

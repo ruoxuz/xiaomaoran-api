@@ -1,6 +1,6 @@
 package com.ruoxu.xiaomaoran.common.config;
 
-import com.ruoxu.xiaomaoran.service.UserDetailsServiceImpl;
+import com.ruoxu.xiaomaoran.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
