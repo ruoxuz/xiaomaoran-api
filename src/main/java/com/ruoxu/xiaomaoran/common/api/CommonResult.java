@@ -2,6 +2,7 @@ package com.ruoxu.xiaomaoran.common.api;
 
 /**
  * 通用返回对象
+ * @author ruoxu
  */
 public class CommonResult<T> {
     /**

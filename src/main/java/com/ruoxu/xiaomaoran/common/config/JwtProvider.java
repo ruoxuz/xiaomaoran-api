@@ -22,8 +22,8 @@ public class JwtProvider {
 
     /**
      * 生成Token
-     * @param authentication
-     * @return
+     * @param authentication authentication
+     * @return token
      */
     public String generateJwtToken(Authentication authentication) {
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
@@ -37,8 +37,8 @@ public class JwtProvider {
 
     /**
      * 验证Token是否有效
-     * @param authToken
-     * @return
+     * @param authToken token
+     * @return true or false
      */
     public boolean validateJwtToken(String authToken) {
         try {
@@ -60,8 +60,8 @@ public class JwtProvider {
 
     /**
      * 从Token获取用户名
-     * @param token
-     * @return
+     * @param token token
+     * @return username
      */
     public String getUsernameFromJwtToken(String token) {
         return Jwts.parser()

@@ -1,5 +1,9 @@
 package com.ruoxu.xiaomaoran.common.api;
 
+/**
+ * @author ruoxu
+ */
+
 public enum ResultCode implements IErrorCode {
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),

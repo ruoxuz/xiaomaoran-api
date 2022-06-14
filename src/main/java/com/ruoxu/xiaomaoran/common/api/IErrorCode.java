@@ -1,5 +1,8 @@
 package com.ruoxu.xiaomaoran.common.api;
 
+/**
+ * @author ruoxu
+ */
 public interface IErrorCode {
     /**
      * 返回码
